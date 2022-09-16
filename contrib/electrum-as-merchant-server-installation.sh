@@ -45,6 +45,7 @@ WSRANDOM=$((8000 + RANDOM % 999))
 OPTIONS=(
 	"Electrum Bitcoin Original (& segwit)"
 	"Electrum Bitcoin Testnet Original (& segwit)"
+	"Electrum BlackCoin"
 	"Electrum Litecoin (& segwit)"
 	"Electrum Litecoin Testnet (& segwit)"
 	"Electrum Dash"
@@ -65,6 +66,7 @@ select option in "${OPTIONS[@]}"; do
 		6) export ELECTRUM="EDT"; export GIT="https://github.com/akhavr/electrum-dash"; break ;;
 		7) export ELECTRUM="EC"; export GIT="https://github.com/fyookball/electrum/"; break ;;
 		8) export ELECTRUM="ECT"; export GIT="https://github.com/fyookball/electrum/"; break ;;
+		9) export ELECTRUM="EBLK"; export GIT="https://github.com/CoinBlack/electrum-blk"; break ;;
 	esac
 done
 
@@ -148,6 +150,10 @@ elif [ $ELECTRUM = "EL" ] || [ $ELECTRUM = "ELT" ]; then
 	ln -s ~/.local/bin/electrum-ltc ~/.local/bin/electrum || true
 	ln -s ~/.electrum-ltc ~/.electrum || true
 	BLOCKCHAIN=LTC
+elif [ $ELECTRUM = "EBLK" ]; then
+	ln -s ~/.local/bin/electrum-blk ~/.local/bin/electrum || true
+	ln -s ~/.electrum-blk ~/.electrum || true
+	BLOCKCHAIN=BLK
 elif [ $ELECTRUM = "ED" ] || [ $ELECTRUM = "EDT" ]; then
 	ln -s ~/.local/bin/electrum-dash ~/.local/bin/electrum || true
 	ln -s ~/.electrum-dash ~/.electrum || true
@@ -216,10 +222,10 @@ RPCPASSWORD=`echo $config|jsonValue rpcpassword`
 IPNO=`/sbin/ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
 
 # electrum merchant from sources and finish configuration
-git clone https://github.com/spesmilo/electrum-merchant/
-pip3 install electrum-merchant/
+git clone https://github.com/CryptoLover705/electrum-merchant-blackcoin/
+pip3 install electrum-merchant-blackcoin/
 
-python3 -m electrum-merchant --blockchain=$BLOCKCHAIN $NETWORK
+python3 -m electrum-merchant-blackcoin --blockchain=$BLOCKCHAIN $NETWORK
 
 echo ""
 echo "Preparing and writing systemd service file to $USER.service."

@@ -11,5 +11,5 @@ Electrum Merchant automatic deployment
 Run:
 
 ```bash
-wget https://raw.githubusercontent.com/spesmilo/electrum-merchant/master/contrib/electrum-as-merchant-server-installation.sh
+wget https://raw.githubusercontent.com/CryptoLover705/electrum-merchant-blackcoin/master/contrib/electrum-as-merchant-server-installation.sh
 ```
