@@ -52,8 +52,8 @@ def main():
         help='Coin network [mainnet, testnet]'
     )
     parser.add_argument(
-        '-b', '--blockchain', nargs='?', required=False, default="BTC",
-        help='Which blockchain we use [BTC, LTC, BCH, DASH]'
+        '-b', '--blockchain', nargs='?', required=False, default="BLK",
+        help='Which blockchain we use [BTC, LTC, BLK, BCH, DASH]'
     )
     args = parser.parse_args()
 
@@ -61,6 +61,8 @@ def main():
         from electrum import SimpleConfig
     elif args.blockchain == "LTC":
         from electrum_ltc import SimpleConfig
+    elif args.blockchain == "BLK":
+        from electrum_blk import SimpleConfig
     elif args.blockchain == "BCH":
         from electroncash import SimpleConfig
     elif args.blockchain == "DASH":
